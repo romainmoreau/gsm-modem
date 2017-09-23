@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>fr.romainmoreau.gsmmodem</groupId>
 		<artifactId>gsm-modem</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 	<artifactId>gsm-modem-client-common-uart</artifactId>
 	<dependencies>
