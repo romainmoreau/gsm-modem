@@ -18,7 +18,7 @@
 		<module>gsm-modem-jaxb-api</module>
 		<module>gsm-modem-client-web</module>
 		<module>gsm-modem-web-common</module>
-		<module>gsm-modem-web-jssc</module>
+		<module>gsm-modem-web</module>
 	</modules>
 	<properties>
 		<java.version>1.8</java.version>

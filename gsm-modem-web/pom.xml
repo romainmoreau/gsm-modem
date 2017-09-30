@@ -6,7 +6,7 @@
 		<artifactId>gsm-modem</artifactId>
 		<version>0.2.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>gsm-modem-web-jssc</artifactId>
+	<artifactId>gsm-modem-web</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

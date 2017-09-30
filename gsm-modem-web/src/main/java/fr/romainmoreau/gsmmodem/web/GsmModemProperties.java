@@ -1,4 +1,4 @@
-package fr.romainmoreau.gsmmodem.web.jssc;
+package fr.romainmoreau.gsmmodem.web;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 @Component
 @Validated
 @ConfigurationProperties("gsm-modem")
-public class JsscGsmModemProperties {
+public class GsmModemProperties {
 	@NotNull
 	private String portName;
 

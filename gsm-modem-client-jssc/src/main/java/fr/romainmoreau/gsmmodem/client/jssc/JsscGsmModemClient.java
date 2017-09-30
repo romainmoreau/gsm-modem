@@ -10,6 +10,8 @@ import jssc.SerialPortException;
 public class JsscGsmModemClient extends AbstractUARTGsmModemClient {
 	private final SerialPort serialPort;
 
+	private SerialEventExceptionListener serialEventExceptionListener;
+
 	public JsscGsmModemClient(String portName, long timeout) throws IOException {
 		super(timeout);
 		try {
@@ -50,8 +52,14 @@ public class JsscGsmModemClient extends AbstractUARTGsmModemClient {
 					onReadByte(readByte);
 				}
 			}
-		} catch (SerialPortException e) {
-			throw new RuntimeException(e);
+		} catch (Exception e) {
+			if (serialEventExceptionListener != null) {
+				serialEventExceptionListener.onException(e);
+			}
 		}
+	}
+
+	public void setSerialEventExceptionListener(SerialEventExceptionListener serialEventExceptionListener) {
+		this.serialEventExceptionListener = serialEventExceptionListener;
 	}
 }
