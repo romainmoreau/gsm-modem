@@ -1,5 +1,6 @@
 package fr.romainmoreau.gsmmodem.web;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -24,10 +25,10 @@ public class SmsRouter {
 	public void route(String gsmNumber, String sms) {
 		Optional.ofNullable(smsRoutingProperties.getSmsRoutes()).ifPresent(smsRoutes -> smsRoutes.stream()
 				.filter(smsRoute -> smsRoute.matches(sms)).findFirst().ifPresent(smsRoute -> {
-					String url = UriComponentsBuilder.fromHttpUrl(smsRoute.getEndpointUrl())
-							.queryParam("gsmNumber", gsmNumber).queryParam("sms", sms).build().toUriString();
-					LOGGER.info("Routing SMS to {}", url);
-					restTemplate.postForObject(url, null, String.class);
+					URI uri = UriComponentsBuilder.fromHttpUrl(smsRoute.getEndpointUrl())
+							.queryParam("gsmNumber", "{gsmNumber}").queryParam("sms", "{sms}").build(gsmNumber, sms);
+					LOGGER.info("Routing SMS to {}", uri);
+					restTemplate.postForObject(uri, null, String.class);
 				}));
 	}
 }

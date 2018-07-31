@@ -12,7 +12,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
 
 import fr.romainmoreau.gsmmodem.client.api.GsmModemClient;
-import fr.romainmoreau.gsmmodem.client.jssc.JsscGsmModemClient;
+import fr.romainmoreau.gsmmodem.client.api.GsmModemException;
+import fr.romainmoreau.gsmmodem.client.jserialcomm.JSerialCommGsmModemClient;
 
 @EnableAsync
 @SpringBootApplication(scanBasePackages = "fr.romainmoreau.gsmmodem.web")
@@ -26,15 +27,16 @@ public class WebGsmModemApplication {
 	private WebGsmEventListener webGsmEventListener;
 
 	@Bean
-	public GsmModemClient gsmModemClient() throws IOException {
-		LOGGER.info("Creating JSSC gsm-modem client using port name {} and timeout {}",
+	public GsmModemClient gsmModemClient() throws IOException, GsmModemException {
+		LOGGER.info("Creating jSerialComm gsm-modem client using port name {} and timeout {}",
 				gsmModemProperties.getPortName(), gsmModemProperties.getTimeout());
-		JsscGsmModemClient jsscGsmModemClient = new JsscGsmModemClient(gsmModemProperties.getPortName(),
-				gsmModemProperties.getTimeout());
-		jsscGsmModemClient.setGsmEventListener(webGsmEventListener);
-		jsscGsmModemClient.setReadLineListener(readLine -> LOGGER.info("{}", readLine));
-		jsscGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
-		return jsscGsmModemClient;
+		JSerialCommGsmModemClient jSerialCommGsmModemClient = new JSerialCommGsmModemClient(
+				gsmModemProperties.getPortName(), gsmModemProperties.getTimeout());
+		jSerialCommGsmModemClient.setGsmEventListener(webGsmEventListener);
+		jSerialCommGsmModemClient.setReadLineListener(readLine -> LOGGER.info("{}", readLine));
+		jSerialCommGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
+		jSerialCommGsmModemClient.setSMSTextMode();
+		return jSerialCommGsmModemClient;
 	}
 
 	@Bean

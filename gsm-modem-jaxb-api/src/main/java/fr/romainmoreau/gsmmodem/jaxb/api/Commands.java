@@ -10,7 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Commands {
 	private List<Command> commands;
 
-	@XmlElements({ @XmlElement(name = "sendSms", type = SendSms.class) })
+	@XmlElements({ @XmlElement(name = "sendSms", type = SendSms.class),
+			@XmlElement(name = "setSMSTextMode", type = SetSMSTextMode.class) })
 	public List<Command> getCommands() {
 		return commands;
 	}

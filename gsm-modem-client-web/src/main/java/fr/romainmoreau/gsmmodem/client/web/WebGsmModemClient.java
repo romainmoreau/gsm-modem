@@ -14,6 +14,7 @@ import fr.romainmoreau.gsmmodem.client.common.AbstractGsmModemClient;
 import fr.romainmoreau.gsmmodem.jaxb.api.Command;
 import fr.romainmoreau.gsmmodem.jaxb.api.Commands;
 import fr.romainmoreau.gsmmodem.jaxb.api.SendSms;
+import fr.romainmoreau.gsmmodem.jaxb.api.SetSMSTextMode;
 
 public class WebGsmModemClient extends AbstractGsmModemClient {
 	private final RestTemplate restTemplate;
@@ -23,6 +24,11 @@ public class WebGsmModemClient extends AbstractGsmModemClient {
 	public WebGsmModemClient(String protocol, String host, int port) throws MalformedURLException, URISyntaxException {
 		restTemplate = new RestTemplate();
 		uri = new URL(protocol, host, port, "/").toURI();
+	}
+
+	@Override
+	public synchronized void setSMSTextMode() throws IOException, GsmModemException {
+		sendCommand(new SetSMSTextMode());
 	}
 
 	@Override

@@ -50,9 +50,14 @@ public abstract class AbstractUARTGsmModemClient extends AbstractGsmModemClient 
 	}
 
 	@Override
-	public synchronized void sendSms(String gsmNumber, String sms) throws IOException, GsmModemException {
+	public synchronized void setSMSTextMode() throws IOException, GsmModemException {
 		sendString("AT+CMGF=1" + CR);
 		waitForFirstOkEventOrErrorEvent();
+	}
+
+	@Override
+	public synchronized void sendSms(String gsmNumber, String sms) throws IOException, GsmModemException {
+		setSMSTextMode();
 		sendString("AT+CMGS=\"" + gsmNumber + "\"" + CR);
 		waitForFirstPromptEvent();
 		sendString(sms + SUB);
