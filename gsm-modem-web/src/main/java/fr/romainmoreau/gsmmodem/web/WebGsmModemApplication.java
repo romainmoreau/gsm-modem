@@ -35,7 +35,6 @@ public class WebGsmModemApplication {
 		jSerialCommGsmModemClient.setGsmEventListener(webGsmEventListener);
 		jSerialCommGsmModemClient.setReadLineListener(readLine -> LOGGER.info("{}", readLine));
 		jSerialCommGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
-		jSerialCommGsmModemClient.setSMSTextMode();
 		return jSerialCommGsmModemClient;
 	}
 
