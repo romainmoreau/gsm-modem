@@ -37,7 +37,6 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<finalName>${project.artifactId}</finalName>
 							<executable>true</executable>
 						</configuration>
 					</execution>
@@ -54,9 +53,8 @@
 						</goals>
 						<configuration>
 							<headerType>console</headerType>
-							<jar>target/${project.artifactId}.jar</jar>
 							<jre>
-								<minVersion>10</minVersion>
+								<minVersion>11</minVersion>
 							</jre>
 						</configuration>
 					</execution>
