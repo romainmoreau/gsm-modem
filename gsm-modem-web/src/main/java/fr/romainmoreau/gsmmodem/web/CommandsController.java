@@ -1,4 +1,4 @@
-package fr.romainmoreau.gsmmodem.web.common;
+package fr.romainmoreau.gsmmodem.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fr.romainmoreau.gsmmodem.jaxb.api.Commands;
 
 @Controller
-@RequestMapping("/")
-public class GsmModemController {
+@RequestMapping("/commands")
+public class CommandsController {
 	@Autowired
 	private GsmModemWorker gsmModemWorker;
 

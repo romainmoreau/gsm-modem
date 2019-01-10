@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title th:text="${portName}"></title>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+<script th:inline="javascript">
+var stompEndpointUrl = [[@{/stompEndpoint}]];
+	</script>
+<script th:src="@{/js/console.js}"></script>
+</head>
+<body>
+	<table>
+	</table>
+	<input type="text" />
+</body>
+</html>

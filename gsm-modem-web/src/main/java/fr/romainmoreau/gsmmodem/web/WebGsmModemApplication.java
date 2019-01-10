@@ -8,16 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 import fr.romainmoreau.gsmmodem.client.api.GsmModemClient;
 import fr.romainmoreau.gsmmodem.client.api.GsmModemException;
 import fr.romainmoreau.gsmmodem.client.jserialcomm.JSerialCommGsmModemClient;
 
 @EnableAsync
+@EnableWebSocketMessageBroker
 @SpringBootApplication(scanBasePackages = "fr.romainmoreau.gsmmodem.web")
-public class WebGsmModemApplication {
+public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebGsmModemApplication.class);
 
 	@Autowired
@@ -26,6 +32,9 @@ public class WebGsmModemApplication {
 	@Autowired
 	private WebGsmEventListener webGsmEventListener;
 
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
+
 	@Bean
 	public GsmModemClient gsmModemClient() throws IOException, GsmModemException {
 		LOGGER.info("Creating jSerialComm gsm-modem client using port name {} and timeout {}",
@@ -33,7 +42,10 @@ public class WebGsmModemApplication {
 		JSerialCommGsmModemClient jSerialCommGsmModemClient = new JSerialCommGsmModemClient(
 				gsmModemProperties.getPortName(), gsmModemProperties.getTimeout());
 		jSerialCommGsmModemClient.setGsmEventListener(webGsmEventListener);
-		jSerialCommGsmModemClient.setReadLineListener(readLine -> LOGGER.info("{}", readLine));
+		jSerialCommGsmModemClient.setReadLineListener(readLine -> {
+			LOGGER.info("{}", readLine);
+			simpMessagingTemplate.convertAndSend("/topic/line", readLine);
+		});
 		jSerialCommGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
 		return jSerialCommGsmModemClient;
 	}
@@ -41,6 +53,17 @@ public class WebGsmModemApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	@Override
+	public void configureMessageBroker(MessageBrokerRegistry messageBrokerRegistry) {
+		messageBrokerRegistry.enableSimpleBroker("/topic");
+		messageBrokerRegistry.setApplicationDestinationPrefixes("/app");
+	}
+
+	@Override
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		registry.addEndpoint("/stompEndpoint").withSockJS();
 	}
 
 	public static final void main(String[] args) throws Exception {

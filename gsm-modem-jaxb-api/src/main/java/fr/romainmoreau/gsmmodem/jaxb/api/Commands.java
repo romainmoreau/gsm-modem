@@ -11,6 +11,7 @@ public class Commands {
 	private List<Command> commands;
 
 	@XmlElements({ @XmlElement(name = "sendSms", type = SendSms.class),
+			@XmlElement(name = "sendCommand", type = SendCommand.class),
 			@XmlElement(name = "setSMSTextMode", type = SetSMSTextMode.class) })
 	public List<Command> getCommands() {
 		return commands;

@@ -64,6 +64,11 @@ public abstract class AbstractUARTGsmModemClient extends AbstractGsmModemClient 
 		waitForFirstOkEventOrErrorEvent();
 	}
 
+	@Override
+	public synchronized void sendCommand(String command) throws IOException, GsmModemException {
+		sendString(command + CR);
+	}
+
 	private GsmEvent waitForGsmEvent() throws GsmModemResponseException {
 		GsmEvent gsmEvent = null;
 		try {

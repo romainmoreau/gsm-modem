@@ -1,4 +1,4 @@
-package fr.romainmoreau.gsmmodem.web.common;
+package fr.romainmoreau.gsmmodem.web;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
