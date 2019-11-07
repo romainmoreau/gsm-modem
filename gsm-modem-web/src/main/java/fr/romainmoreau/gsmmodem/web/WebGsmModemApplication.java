@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -23,6 +24,7 @@ import fr.romainmoreau.gsmmodem.client.jserialcomm.JSerialCommGsmModemClient;
 @EnableAsync
 @EnableWebSocketMessageBroker
 @SpringBootApplication(scanBasePackages = "fr.romainmoreau.gsmmodem.web")
+@ConfigurationPropertiesScan
 public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebGsmModemApplication.class);
 
