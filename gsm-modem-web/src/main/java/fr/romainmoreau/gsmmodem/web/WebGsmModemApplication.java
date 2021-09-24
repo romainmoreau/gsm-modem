@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -34,11 +33,9 @@ public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer 
 	@Autowired
 	private WebGsmEventListener webGsmEventListener;
 
-	@Autowired
-	private SimpMessagingTemplate simpMessagingTemplate;
-
 	@Bean
-	public GsmModemClient gsmModemClient() throws IOException, GsmModemException {
+	public GsmModemClient gsmModemClient(SimpMessagingTemplate simpMessagingTemplate)
+			throws IOException, GsmModemException {
 		LOGGER.info("Creating jSerialComm gsm-modem client using port name {} and timeout {}",
 				gsmModemProperties.getPortName(), gsmModemProperties.getTimeout());
 		JSerialCommGsmModemClient jSerialCommGsmModemClient = new JSerialCommGsmModemClient(
@@ -50,11 +47,6 @@ public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer 
 		});
 		jSerialCommGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
 		return jSerialCommGsmModemClient;
-	}
-
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
 	}
 
 	@Override

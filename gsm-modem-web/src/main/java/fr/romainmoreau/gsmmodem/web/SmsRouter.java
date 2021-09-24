@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -18,8 +19,11 @@ public class SmsRouter {
 	@Autowired
 	private SmsRoutingProperties smsRoutingProperties;
 
-	@Autowired
 	private RestTemplate restTemplate;
+
+	public SmsRouter(RestTemplateBuilder restTemplateBuilder) {
+		this.restTemplate = restTemplateBuilder.build();
+	}
 
 	@Async
 	public void route(String gsmNumber, String sms) {
