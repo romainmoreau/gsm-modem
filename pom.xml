@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.2</version>
+		<version>2.6.0-M3</version>
 	</parent>
 	<groupId>fr.romainmoreau.gsmmodem</groupId>
 	<artifactId>gsm-modem</artifactId>
@@ -21,7 +21,7 @@
 		<module>gsm-modem-web</module>
 	</modules>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -85,7 +85,7 @@
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
-				<version>2.3.4</version>
+				<version>2.3.5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
