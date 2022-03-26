@@ -2,10 +2,9 @@ package fr.romainmoreau.gsmmodem.jaxb.api;
 
 import java.io.IOException;
 
-import javax.xml.bind.annotation.XmlValue;
-
 import fr.romainmoreau.gsmmodem.client.api.GsmModemClient;
 import fr.romainmoreau.gsmmodem.client.api.GsmModemException;
+import jakarta.xml.bind.annotation.XmlValue;
 
 public class SendCommand implements Command {
 	private String command;

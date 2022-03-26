@@ -1,8 +1,8 @@
 package fr.romainmoreau.gsmmodem.web;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.util.StringUtils;
+
+import jakarta.validation.constraints.NotNull;
 
 public class SmsRoute {
 	@NotNull

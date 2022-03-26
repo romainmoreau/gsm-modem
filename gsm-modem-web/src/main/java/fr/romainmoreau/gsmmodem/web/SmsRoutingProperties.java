@@ -2,10 +2,10 @@ package fr.romainmoreau.gsmmodem.web;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.Valid;
 
 @Validated
 @ConfigurationProperties("sms-routing")
