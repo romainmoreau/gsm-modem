@@ -34,8 +34,7 @@ public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer 
 	private WebGsmEventListener webGsmEventListener;
 
 	@Bean
-	public GsmModemClient gsmModemClient(SimpMessagingTemplate simpMessagingTemplate)
-			throws IOException, GsmModemException {
+	GsmModemClient gsmModemClient(SimpMessagingTemplate simpMessagingTemplate) throws IOException, GsmModemException {
 		LOGGER.info("Creating jSerialComm gsm-modem client using port name {} and timeout {}",
 				gsmModemProperties.getPortName(), gsmModemProperties.getTimeout());
 		JSerialCommGsmModemClient jSerialCommGsmModemClient = new JSerialCommGsmModemClient(
