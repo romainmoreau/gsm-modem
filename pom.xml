@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.1.0</version>
 	</parent>
 	<groupId>fr.romainmoreau.gsmmodem</groupId>
 	<artifactId>gsm-modem</artifactId>
@@ -21,7 +21,7 @@
 		<module>gsm-modem-web</module>
 	</modules>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>20</java.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -85,7 +85,7 @@
 			<dependency>
 				<groupId>org.webjars</groupId>
 				<artifactId>jquery</artifactId>
-				<version>3.6.3</version>
+				<version>3.6.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.webjars</groupId>

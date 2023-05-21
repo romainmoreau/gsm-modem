@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Arrays;
 
 import org.springframework.web.client.RestTemplate;
@@ -24,7 +23,7 @@ public class WebGsmModemClient extends AbstractGsmModemClient {
 
 	public WebGsmModemClient(String protocol, String host, int port) throws MalformedURLException, URISyntaxException {
 		restTemplate = new RestTemplate();
-		uri = new URL(protocol, host, port, "/commands").toURI();
+		uri = new URI(protocol, null, host, port, "/commands", null, null);
 	}
 
 	@Override
