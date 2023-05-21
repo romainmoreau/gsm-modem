@@ -45,6 +45,7 @@ public class WebGsmModemApplication implements WebSocketMessageBrokerConfigurer 
 			simpMessagingTemplate.convertAndSend("/topic/line", readLine);
 		});
 		jSerialCommGsmModemClient.setSerialEventExceptionListener(e -> LOGGER.error("Exception", e));
+		jSerialCommGsmModemClient.setSMSTextMode();
 		return jSerialCommGsmModemClient;
 	}
 
