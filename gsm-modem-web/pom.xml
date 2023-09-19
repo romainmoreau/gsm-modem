@@ -83,7 +83,8 @@
 						<configuration>
 							<headerType>console</headerType>
 							<jre>
-								<minVersion>16</minVersion>
+								<path>%JAVA_HOME%</path>
+								<minVersion>${java.version}</minVersion>
 							</jre>
 						</configuration>
 					</execution>
