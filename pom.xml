@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
+		<version>3.3.0-M1</version>
 	</parent>
 	<groupId>fr.romainmoreau.gsmmodem</groupId>
 	<artifactId>gsm-modem</artifactId>
@@ -80,11 +80,6 @@
 				<groupId>com.fazecast</groupId>
 				<artifactId>jSerialComm</artifactId>
 				<version>2.10.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>3.13.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.webjars</groupId>
